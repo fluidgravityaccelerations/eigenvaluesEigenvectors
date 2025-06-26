@@ -48,4 +48,11 @@ Batched computation of singular values only on GPU using cuPy, with support for 
   - **CPU:** Dispatches to LAPACK’s divide-and-conquer driver `*gesdd` (falling back to `*gesvd` when necessary).
   - **CUDA:** Calls CUDA Toolkit’s cuSOLVER `gesvd` (divide-and-conquer) implementation for real and complex types, with a fallback to the Jacobi-based `gesvdj` solver when higher accuracy or robustness is required.
 
+## CuPy Batched Full SVD with Generic Data Types
+
+Batched computation of full singular‐value decomposition on GPU using CuPy, with support for both real and complex matrices.
+
+- **Underlying Algorithm**
+  - **CPU**: Dispatches to LAPACK’s divide-and-conquer driver *gesdd (with fallback to *gesvd).
+  - **CUDA**: Calls NVIDIA cuSOLVER’s gesvd (divide-and-conquer) implementation, which performs bidiagonalization followed by a divide-and-conquer solve to produce the full U, Σ and Vᵀ factors.
 
