@@ -36,9 +36,9 @@ Batched computation of singular values only on CPU and GPU using JAX, with suppo
 
 Batched computation of singular values only on GPU using CuPy, with support for both real and complex matrices.
 
-- **Underlying Algorithm**  
-  - **CUDA**: Calls cuSOLVER’s batched SVD routines (`gesvdBatched` or Jacobi-based `gesvdjBatched`) with `jobz='N'`, which performs:
-    1. Bidiagonalization of each matrix  
-    2. A divide-and-conquer solve on the bidiagonal form  
-    3. Materializes only the singular values (skips forming U and Vᵀ)
+- **Underlying Algorithm**
+  - **CPU**: Dispatches to SciPy/LAPACK’s divide-and-conquer driver `gesdd` (with fallback to `gesvd`).
+  - **CUDA (CuPy)**: Calls cuSOLVER’s **`gesvdaStridedBatched`** driver, which performs bidiagonalization followed by a divide-and-conquer solve—and when `compute_uv=False` only materializes the singular values.
+
+
 
