@@ -56,3 +56,19 @@ Batched computation of full singular‐value decomposition on GPU using CuPy, wi
   - **CPU**: Dispatches to LAPACK’s divide-and-conquer driver *gesdd (with fallback to *gesvd).
   - **CUDA**: Calls NVIDIA cuSOLVER’s gesvd (divide-and-conquer) implementation, which performs bidiagonalization followed by a divide-and-conquer solve to produce the full U, Σ and Vᵀ factors.
 
+## Batched Singular-Value Computation on a Single GPU
+
+Compute only the singular values of a large batch of small matrices on one GPU, using PyCUDA kernels.
+
+---
+
+### 🔧 Dependencies
+- Python 3.x  
+- [PyCUDA](https://documen.tician.de/pycuda/)  
+- NumPy  
+
+### ⚙️ Usage Notes
+- Assumes **number of rows ≤ number of columns**.  
+- Accuracy parameters (e.g. `1e-7` for single, `1e-13` for double) can be adjusted in the root solver.
+
+---
