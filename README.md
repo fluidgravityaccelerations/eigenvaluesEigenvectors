@@ -71,4 +71,23 @@ Compute only the singular values of a large batch of small matrices on one GPU, 
 - Assumes **number of rows ≤ number of columns**.  
 - Accuracy parameters (e.g. `1e-7` for single, `1e-13` for double) can be adjusted in the root solver.
 
+## Batched Singular-Value Computation on Multiple GPUs
+
+Distribute a large batch of small matrices across one or more GPUs and compute **only** their singular values in parallel using PyCUDA.
+
+---
+
+### 🔧 Dependencies
+- Python 3.x  
+- [PyCUDA](https://documen.tician.de/pycuda/)  
+- NumPy  
+
+---
+
+### ⚙️ Usage Notes
+- **Multi‑GPU support:** automatically splits the batch evenly across available devices (fallback to one GPU if only one is present).  
+- Assumes **number of rows ≤ number of columns**.  
+- Uses a pipelined sequence of custom kernels (rearrange → bidiagonalize → extract → tridiagonalize → pivots → intervals → Sturm bisection) on each GPU.  
+- Accuracy tolerance adjustable via `sturmTol` (`1e-7` for `float32`, `1e-13` for `float64`).  
+- No intermediate copies—everything runs asynchronously on per‑GPU CUDA streams for maximal throughput.  
 ---
