@@ -21,8 +21,8 @@ Batched computation of singular values only of real or complex matrices on GPU u
 Batched computation of singular values only of real or complex matrices on GPU using JAX. With minor modifications, the code can run on CPU. `compute_uv=False` forces the computation of the singular values only.
 
 - **Underlying Algorithm**  
-  - On **CPU**, `torch.linalg.svd(..., full_matrices=False)` dispatches to LAPACK’s divide‐and‐conquer driver `*gesdd` (falling back to `*gesvd` if needed).  
-  - On **CUDA**, it calls MAGMA’s `gesvd` implementation, which likewise performs bidiagonalization followed by a divide‐and‐conquer solve of the bidiagonal SVD.
+  - **CPU**: same as JAX.  
+  - **GPU**: same as CuPy.
 
 ## Batched Singular-Value Computation on a Single GPU (`batchedSingularValuesSingleGPU.ipynb`)
 
