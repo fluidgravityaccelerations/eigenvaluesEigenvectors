@@ -16,22 +16,14 @@ Batched computation of singular values only on GPU using PyTorch, with support f
   CPU: Dispatches to LAPACK’s divide-and-conquer driver *gesdd (with fallback to *gesvd).
   CUDA: Calls MAGMA’s gesvd implementation, which performs bidiagonalization followed by a divide-and-conquer solve, while only materializing the singular values.
 
-## JAX Batched SVD with Generic Data Types
+## JAX Batched SVD or Singular-Values-Only Computation with Generic Data Types (`JAXBatchedSVDGenericType.ipynb` and `JAXBatchedSVsonlyGenericType.ipynb`)
 
-Batched singular value decompositions (SVD) on GPU (and CPU) using JAX, with support for both real and complex matrix types:
-
-- **Underlying Algorithm**  
-  - On **CPU**, JAX’s `jax.numpy.linalg.svd` is implemented in XLA using Eigen’s divide-and-conquer bidiagonalization driver (analogous to LAPACK’s `*gesdd`, with a fallback to `*gesvd`).  
-  - On **CUDA**, it issues an XLA custom-call to NVIDIA cuSolver’s `gesvd` divide-and-conquer solver (and, for smaller batched workloads, can fall back to the `gesvdj` Jacobi-based implementation).
-
-## JAX Batched Singular-Values-Only SVD with Generic Data Types (`JAXBatchedSVsonlyGenericType.ipynb`)
-
-Batched computation of singular values only of complex matrices on GPU using JAX. With minor modifications, the code can run on CPU. `compute_uv=False` forces the computation of the singular values only.
+Batched computation of singular values only of real or complex matrices on GPU using JAX. With minor modifications, the code can run on CPU. `compute_uv=False` forces the computation of the singular values only.
 
 - **Underlying Algorithm**  
-  - **CPU**: JAX uses LAPACK (via SciPy's interface), typically the `?gesdd/?gesvd` routines (divide-and-conquer or QR-based methods).
-  - **GPU**: On NVIDIA GPUs, JAX uses `cuSOLVER`'s `cusolverDnXgesvd` for smaller matrices or `cusolverDnXgesvdp` for larger ones, depending on performance.
-    
+  - **CPU**: JAX uses LAPACK's `?gesdd/?gesvd` routines (1. bidiagonalization plus 2. divide-and-conquer or 2. QR-based methods, respectively).
+  - **GPU**: On NVIDIA GPUs, JAX uses `cuSOLVER`'s `?gesvd` for smaller matrices or `?gesvdp` for larger ones, depending on performance. They use 1. bidiagonalization plus 2. divide-and-conquer or 2. QR-based methods, respectively.
+
 ## CuPy Batched SVD with Generic Data Types (`CuPyBatchedSVDGenericType.ipynb`)
 
 Batched computation of SVD of complex matrices on GPU using CuPy.
