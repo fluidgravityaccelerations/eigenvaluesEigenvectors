@@ -1,21 +1,5 @@
 # GPU computation of eigenvalues and eigenvectors
 
-## PyTorch Batched SVD with Generic Data Types
-
-Batched singular value decompositions (SVD) on GPU using PyTorch, with support for both real and complex matrix types:
-
-- **Underlying Algorithm**  
-  - On **CPU**, `torch.linalg.svd(..., full_matrices=False)` dispatches to LAPACK’s divide‐and‐conquer driver `*gesdd` (falling back to `*gesvd` if needed).  
-  - On **CUDA**, it calls MAGMA’s `gesvd` implementation, which likewise performs bidiagonalization followed by a divide‐and‐conquer solve of the bidiagonal SVD.
-
-## PyTorch Batched Singular-Values-Only SVD with Generic Data Types
-
-Batched computation of singular values only on GPU using PyTorch, with support for both real and complex matrices.
-
-- **Underlying Algorithm**
-  CPU: Dispatches to LAPACK’s divide-and-conquer driver *gesdd (with fallback to *gesvd).
-  CUDA: Calls MAGMA’s gesvd implementation, which performs bidiagonalization followed by a divide-and-conquer solve, while only materializing the singular values.
-
 ## JAX Batched SVD or Singular-Values-Only Computation with Generic Data Types (`JAXBatchedSVDGenericType.ipynb` and `JAXBatchedSVsonlyGenericType.ipynb`)
 
 Batched computation of singular values only of real or complex matrices on GPU using JAX. With minor modifications, the code can run on CPU. `compute_uv=False` forces the computation of the singular values only.
@@ -31,6 +15,14 @@ Batched computation of singular values only of real or complex matrices on GPU u
 - **Underlying Algorithm**
   - **CPU**: same as JAX.
   - **GPU**: On NVIDIA GPUs, CuPy uses `cuSOLVER`'s `?gesvd`.
+
+## PyTorch Batched SVD or Singular-Values-Only Computation with Generic Data Types (`PyTorchBatchedSVDGenericType.ipynb` and `PyTorchBatchedSVsonlyGenericType.ipynb`)
+
+Batched computation of singular values only of real or complex matrices on GPU using JAX. With minor modifications, the code can run on CPU. `compute_uv=False` forces the computation of the singular values only.
+
+- **Underlying Algorithm**  
+  - On **CPU**, `torch.linalg.svd(..., full_matrices=False)` dispatches to LAPACK’s divide‐and‐conquer driver `*gesdd` (falling back to `*gesvd` if needed).  
+  - On **CUDA**, it calls MAGMA’s `gesvd` implementation, which likewise performs bidiagonalization followed by a divide‐and‐conquer solve of the bidiagonal SVD.
 
 ## Batched Singular-Value Computation on a Single GPU (`batchedSingularValuesSingleGPU.ipynb`)
 
