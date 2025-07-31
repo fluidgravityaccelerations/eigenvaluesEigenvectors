@@ -32,7 +32,7 @@ Batched computation of singular values only of real or complex matrices on GPU u
   - **CPU**: same as JAX.
   - **GPU**: On NVIDIA GPUs, CuPy uses `cuSOLVER`'s `?gesvd`.
 
-## Batched Singular-Value Computation on a Single GPU (`batchedSingularValuesSingleGPUFinal.ipynb`)
+## Batched Singular-Value Computation on a Single GPU (`batchedSingularValuesSingleGPU.ipynb`)
 
 Batched computation of singular values only on GPU using cuPy, with support for real matrices only (single or double precision). Algorithm developed for small matrices.
 
@@ -43,6 +43,6 @@ Batched computation of singular values only on GPU using cuPy, with support for 
   - Assumes **number of rows ≤ number of columns**.  
   - Accuracy parameters (e.g. `1e-7` for single, `1e-13` for double) can be adjusted in the root solver.
 
-## Batched Singular-Value Computation on Multiple GPUs
+## Batched Singular-Value Computation on Multiple GPUs ('batchedSingularValuesMultiGPU.ipynb')
 
-Same as `batchedSingularValuesSingleGPUFinal.ipynb`, but distributes the batch of small matrices across one or more GPUs.
+Same as `batchedSingularValuesSingleGPU.ipynb`, but distributes the batch of small matrices across one or more GPUs.
