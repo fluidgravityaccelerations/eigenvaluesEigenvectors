@@ -8,6 +8,10 @@ Batched computation of singular values only of real or complex matrices on GPU u
   - **CPU**: JAX uses LAPACK's `?gesdd/?gesvd` routines (1. bidiagonalization plus 2. divide-and-conquer or 2. QR-based methods, respectively).
   - **GPU**: On NVIDIA GPUs, JAX uses `cuSOLVER`'s `?gesvd` for smaller matrices or `?gesvdp` for larger ones, depending on performance. They use 1. bidiagonalization plus 2. divide-and-conquer or 2. QR-based methods, respectively.
 
+## JAX Batched Singular-Values-Only Computation with Generic Data Types (`JAXmultiGPU.ipynb`)
+
+Multi-GPU version of the previous algorithm. With minor modifications, the code can run on CPU. `compute_uv=False` forces the computation of the singular values only. Change this assignment to enable to full SVD computation.
+
 ## CuPy Batched SVD or Singular-Values-Only Computation with Generic Data Types (`CuPyBatchedSVDGenericType.ipynb` and `CuPyBatchedSVsonlyGenericType.ipynb`)
 
 Batched computation of singular values only of real or complex matrices on GPU using JAX. With minor modifications, the code can run on CPU. `compute_uv=False` forces the computation of the singular values only.
